@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seat Management System</title>
+  <link rel="stylesheet" type="text/css" href="/assets/seats.css">
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+</head>
+<body>
+  <h1>Seat Management System</h1>
+  <div id="seats-container">
+    <% @seats.each_slice(25) do |seat_row| %>
+      <div class="seat-row">
+        <% seat_row.each do |seat| %>
+          <% if seat.status == 'selected' && seat.visitor_id == @visitor_id %>
+            <div id="seat-<%= seat.id %>" class="seat selected current-visitor"></div>
+          <% else %>
+            <div id="seat-<%= seat.id %>" class="seat <%= seat.status %>"></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <button id="confirm-reservation">Confirm Reservation</button>
+
+  <script>
+    var visitorId = '<%= j @visitor_id %>';
+  </script>
+  <%= javascript_include_tag '/assets/seats.js' %>
+  <script src="/assets/seats.js"></script>
+  <script src="/assets/action_cable.js"></script>
+</body>
+</html>

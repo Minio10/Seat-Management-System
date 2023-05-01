@@ -1,0 +1,32 @@
+#seats-container {
+    width: 525px; /* Adjust the width as needed */
+  }
+  
+  .seat-row {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .seat {
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .vacant {
+    background-color: green;
+  }
+  
+  .selected {
+    background-color: lightcoral;
+  }
+  
+  .selected.current-visitor {
+    background-color: grey !important;
+  }
+  
+  .reserved {
+    background-color: red;
+  }

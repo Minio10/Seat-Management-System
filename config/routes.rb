@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  mount ActionCable.server => '/cable'
+
+  root 'seats#index'
+  post '/seats/update_selected_seats', to: 'seats#update_selected_seats'
 end

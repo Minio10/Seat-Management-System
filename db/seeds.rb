@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -8,6 +10,6 @@
 
 (1..20).each do |row|
   (1..25).each do |column|
-      Seat.create(row: row, column: column)
+    Seat.create(row: row, column: column)
   end
 end

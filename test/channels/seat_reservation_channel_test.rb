@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class SeatSelectionChannelTest < ActionCable::Channel::TestCase
+class SeatReservationChannelTest < ActionCable::Channel::TestCase
   # test "subscribes" do
   #   subscribe
   #   assert subscription.confirmed?

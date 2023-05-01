@@ -10,40 +10,58 @@ $(document).ready(function() {
   var selectedSeats = [];
 
   // Handle seat click event
-  $('.seat.free').click(function(e) {
+  $(document).on('click', '.seat.free', function(e) {
+
+    if ($(this).hasClass('reserved') || $(this).hasClass('selected')) {
+      return; // Exit the event handler if seat is reserved or selected
+    }
     
     e.stopImmediatePropagation();
 
     var seatId = parseInt($(this).attr('id').split('-')[1]);
     var seat = $(this);
 
-    // Check if seat is already selected by the current visitor
-    var isAlreadySelected = seat.hasClass('selected') && seat.data('visitor-id') === visitorId;
-
-    // Toggle seat selection
-    if (isAlreadySelected) {
-      // Unselect the seat
-      seat.removeClass('selected current-visitor');
-      selectedSeats = selectedSeats.filter(function(id) {
-        return id !== seatId;
-      });
-    } else {
       // Select the seat
       seat.removeClass('free');
       seat.addClass('selected current-visitor');
       selectedSeats.push(seatId);
-    }
 
     // Update selected seats for the current visitor in the session
     $.ajax({
       url: '/seats/update_selected_seats',
       method: 'POST',
-      data: { selected_seats: selectedSeats, task: 'select' },
+      data: { seat: seatId, task: 'select' },
       success: function() {
         console.log('Selected seats updated successfully.');
         },
       error: function() {
         console.log('Error occurred while updating selected seats.');
+      }
+    });
+  });
+
+  $(document).on('click', '.seat.selected.current-visitor', function(e) {
+    
+    e.stopImmediatePropagation();
+
+    var seatId = parseInt($(this).attr('id').split('-')[1]);
+    var seat = $(this);
+
+      // Select the seat
+    seat.removeClass('selected current-visitor');
+    seat.addClass('free');
+    selectedSeats.push(seatId);
+
+    // Update selected seats for the current visitor in the session
+    $.ajax({
+      url: '/seats/update_selected_seats',
+      method: 'POST',
+      data: { seat: seatId, task: 'unselect' },
+      success: function() {
+        console.log('Unselected seats updated successfully.');
+        },
+      error: function() {
+        console.log('Error occurred while updating unselected seats.');
       }
     });
   });
@@ -59,9 +77,9 @@ $('#confirm-reservation').click(function(e) {
 
   // Submit the selected seats to the server
   $.ajax({
-    url: '/seats/update_selected_seats',
+    url: '/seats/reserve_selected_seats',
     method: 'POST',
-    data: { selected_seats: selectedSeats, task: 'reserve' },
+    data: { selected_seats: selectedSeats},
     success: function() {
       // Success callback
       console.log('Reservation confirmed successfully.');

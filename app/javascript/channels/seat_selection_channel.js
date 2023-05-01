@@ -11,10 +11,9 @@ consumer.subscriptions.create("SeatSelectionChannel", {
 
   received(data) {
     // Update the frontend with the new seats data
-  var updatedSeats = data.updated_seats;
-  var task = data.task;
+    var seat = data.updated_seats;
+    var task = data.task;
 
-  updatedSeats.forEach(function(seat) {
     var seatElement = $('#seat-' + seat.id);
     if (task === "select") {
       seatElement.removeClass('free');
@@ -24,10 +23,9 @@ consumer.subscriptions.create("SeatSelectionChannel", {
         seatElement.addClass('current-visitor');
       }
     }
-    else if (task === "reserve"){
-      seatElement.removeClass('selected');
-      seatElement.addClass('reserved');
+    else if (task === "unselect"){
+      seatElement.removeClass();
+      seatElement.addClass('seat free');
     }
-  });
   }
 });

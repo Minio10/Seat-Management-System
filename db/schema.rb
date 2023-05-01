@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_152322) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_121151) do
   create_table "seats", force: :cascade do |t|
     t.integer "row"
     t.integer "column"
     t.integer "status", default: 0
-    t.boolean "selected_by_current_user", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "visitor_id"

@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   var selectedSeats = [];
 
-  // Handle seat click event
+  // Handle seat click event for free seats
   $(document).on('click', '.seat.free', function(e) {
 
     if ($(this).hasClass('reserved') || $(this).hasClass('selected')) {
@@ -40,6 +40,7 @@ $(document).ready(function() {
     });
   });
 
+  // Handle seat click event for seats selected by the current visitor
   $(document).on('click', '.seat.selected.current-visitor', function(e) {
     
     e.stopImmediatePropagation();

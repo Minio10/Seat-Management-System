@@ -12,10 +12,6 @@ $(document).ready(function() {
   // Handle seat click event for free seats
   $(document).on('click', '.seat.free', function(e) {
 
-    if ($(this).hasClass('reserved') || $(this).hasClass('selected')) {
-      return; // Exit the event handler if seat is reserved or selected
-    }
-    
     e.stopImmediatePropagation();
 
     var seatId = parseInt($(this).attr('id').split('-')[1]);

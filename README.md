@@ -25,19 +25,25 @@ cd Seat-Management-System
 bundle
 ```
 
-3. Load the database with the seeds:
+3. Run migrations:
+
+```bash
+rails db:migrate
+```
+
+4. Load the database with the seeds:
 
 ```bash
 rails db:seed
 ```
 
-4. Start the rails server:
+5. Start the rails server:
 
 ```bash
 rails server
 ```
 
-5. Open your web browser and navigate to http://localhost:3000 to see the application.
+6. Open your web browser and navigate to http://localhost:3000 to see the application.
 
 ## Project Idea
 
